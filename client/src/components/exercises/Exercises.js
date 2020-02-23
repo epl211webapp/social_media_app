@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import ExerciseItem from "./ExerciseItem";
-
+import ExerciseForm from "./ExerciseForm";
 import { getExercises } from "../../actions/exercise";
 
 const Exercises = ({ getExercises, exercise: { exercises, loading } }) => {
@@ -19,7 +19,7 @@ const Exercises = ({ getExercises, exercise: { exercises, loading } }) => {
         <i className="fas fa-user">Select exercise to solve</i>
       </p>
 
-      {/* ExerciseForm */}
+      <ExerciseForm />
       <div className="exercises">
         {exercises.map(exercise => (
           <ExerciseItem key={exercise._id} exercise={exercise} />

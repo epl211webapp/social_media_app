@@ -14,6 +14,8 @@ import Profile from "./components/profile/Profile";
 import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 import Exercises from "./components/exercises/Exercises";
+import Exercise from "./components/exercise/Exercise";
+
 import PrivateRoute from "./components/routing/PrivateRoute";
 
 //Redux
@@ -46,6 +48,7 @@ const App = () => {
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:id" component={Profile} />
               <PrivateRoute exact path="/exercises" component={Exercises} />
+              <PrivateRoute exact path="/exercises/:id" component={Exercise} />
 
               <PrivateRoute exact path="/posts" component={Posts} />
               <PrivateRoute exact path="/posts/:id" component={Post} />

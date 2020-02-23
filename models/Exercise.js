@@ -16,20 +16,47 @@ const ExerciseSchema = new Schema({
   avatar: {
     type: String
   },
-  choices: [
+  choiceA: {
+    type: String
+  },
+  choiceB: {
+    type: String
+  },
+  choiceC: {
+    type: String
+  },
+  choiceD: {
+    type: String
+  },
+  correct_choice: {
+    type: String
+  },
+  password: {
+    type: String
+  },
+  answers: [
     {
-      choice: {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      },
+      answer: {
         type: String
       }
     }
   ],
-  correct_choice: {
-    type: String
-  },
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  correct_users: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      }
+    }
+  ]
 });
 
 module.exports = Exercise = mongoose.model("exercise", ExerciseSchema);
