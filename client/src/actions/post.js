@@ -70,7 +70,7 @@ export const deletePost = id => async dispatch => {
       type: DELETE_POST,
       payload: id
     });
-
+    console.log(res);
     dispatch(setAlert("Post Removed", "success"));
   } catch (err) {
     dispatch({
@@ -153,15 +153,15 @@ export const addComment = (postId, formData) => async dispatch => {
 
 //Delete comment
 export const deleteComment = (postId, commentId) => async dispatch => {
-  const config = {
+  /* const config = {
     headers: {
       "Content-Type": "application/json"
     }
   };
-
+  */
   try {
     const res = await axios.delete(`/api/posts/comment/${postId}/${commentId}`);
-
+    console.log(res);
     dispatch({
       type: REMOVE_COMMENT,
       payload: commentId

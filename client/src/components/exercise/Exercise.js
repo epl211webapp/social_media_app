@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import { Link } from "react-router-dom";
 
-import ExerciseItem from "../exercises/ExerciseItem";
+//import ExerciseItem from "../exercises/ExerciseItem";
 
 import {
   getExercise,
@@ -43,7 +43,6 @@ const Exercise = ({
     addAnswer(_id, answer_json);
     if (answer === correct_choice) {
       addCorrectAnswerByUser(_id);
-      console.log("Correct choice");
     }
   };
 
@@ -55,7 +54,7 @@ const Exercise = ({
         Back to Exercises
       </Link>
       <div className=" bg-white p-1 my-1">
-        <h2>{description}</h2>
+        <h1>{description}</h1>
         <form onSubmit={e => onSubmit(e)}>
           {choiceA !== null ? (
             <label class="container_radio">
@@ -69,7 +68,7 @@ const Exercise = ({
               <span class="checkmark"></span>
             </label>
           ) : null}
-          {choiceB !== null ? (
+          {choiceB !== "" ? (
             <label class="container_radio">
               {choiceB}
               <input
@@ -81,7 +80,7 @@ const Exercise = ({
               <span class="checkmark"></span>
             </label>
           ) : null}
-          {choiceC !== null ? (
+          {choiceC !== "" ? (
             <label class="container_radio">
               {choiceC}
               <input
@@ -93,7 +92,7 @@ const Exercise = ({
               <span class="checkmark"></span>
             </label>
           ) : null}
-          {choiceD !== null ? (
+          {choiceD !== "" ? (
             <label class="container_radio">
               {choiceD}
               <input

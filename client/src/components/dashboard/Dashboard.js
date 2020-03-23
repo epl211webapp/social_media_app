@@ -22,11 +22,17 @@ const Dashboard = ({
       <h1 className="large text-primary">Dashboard</h1>
       <p className="lead">
         {" "}
-        <i className="fas fa-user"></i>Welcome {user && user.name}
+        <i className="fas fa-user"></i> Welcome {user && user.name}
       </p>
       {profile !== null ? (
         <Fragment>
           <div className="my-2">
+            <a href="https://www.cs.ucy.ac.cy/~annap/epl211/">
+              Official CS 211 website
+            </a>
+          </div>
+
+          <div className="my-10">
             <button className="btn btn-danger" onClick={() => deleteAccount()}>
               <i className="fas fa-user-minus"></i>
               Delete My Account

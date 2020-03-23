@@ -24,7 +24,11 @@ const ExerciseForm = ({ addExercise }) => {
   return (
     <div className="post-form purple">
       <div className="bg-primary p">Create an exercise</div>
-      <form className="form purple my-1" onSubmit={e => onSubmit(e)}>
+      <form
+        className="form purple my-1"
+        enctype="multipart/formd-data"
+        onSubmit={e => onSubmit(e)}
+      >
         <div className="form-group">
           <textarea
             name="description"
@@ -90,6 +94,19 @@ const ExerciseForm = ({ addExercise }) => {
             onChange={e => onChange(e)}
           ></textarea>
         </div>
+        {/*<div className="form-group">
+          <div className="custom-file">
+            <label for="file" class="exerciseTextareas">
+              Optional Image
+            </label>
+            <input
+              type="file"
+              name="file"
+              id="file"
+              class="custom-file-input"
+            />
+  </div>
+        </div>*/}
         <div className="form-group">
           <textarea
             className="exerciseTextareas"

@@ -36,15 +36,15 @@ router.get("/me", auth, async (req, res) => {
 router.post(
   "/",
   [
-    auth,
-    [
+    auth
+    /*[
       check("status", "Status is required")
         .not()
         .isEmpty(),
       check("skills", "Skills is required")
         .not()
         .isEmpty()
-    ]
+    ] */
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -58,7 +58,6 @@ router.post(
       location,
       bio,
       status,
-      githubusername,
       skills,
       youtube,
       facebook,
@@ -75,7 +74,6 @@ router.post(
     if (location) profileFields.location = location;
     if (bio) profileFields.bio = bio;
     if (status) profileFields.status = status;
-    if (githubusername) profileFields.githubusername = githubusername;
     if (skills) {
       profileFields.skills = skills.split(",").map(skill => skill.trim());
     }

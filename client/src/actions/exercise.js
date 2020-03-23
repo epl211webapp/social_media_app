@@ -35,7 +35,7 @@ export const getExercises = () => async dispatch => {
 export const deleteExercise = id => async dispatch => {
   try {
     const res = await axios.delete(`/api/exercises/${id}`);
-
+    console.log(res);
     dispatch({
       type: DELETE_EXERCISE,
       payload: id
@@ -96,20 +96,23 @@ export const addAnswer = (id, formData) => async dispatch => {
 
     dispatch(setAlert("Answer Added", "success"));
   } catch (err) {
-    dispatch({
-      type: EXERCISE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
-    });
+    dispatch(
+      {
+        type: EXERCISE_ERROR,
+        payload: { msg: err.response.statusText, status: err.response.status }
+      },
+      setAlert("Answer already answered", "warning")
+    );
   }
 };
 
 export const addCorrectAnswerByUser = id => async dispatch => {
   try {
     const res = await axios.put(`/api/exercises/correct_users/${id}`);
-
+    console.log(res);
     dispatch({
       type: CORRECT_CHOICE_USER,
-      payload: { id, correct_users: res.data }
+      payload: { id }
     });
   } catch (err) {
     dispatch(

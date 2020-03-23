@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Moment from "react-moment";
 import { connect } from "react-redux";
 import { deleteExercise } from "../../actions/exercise";
@@ -10,7 +10,7 @@ const ExerciseItem = ({
   auth,
   isAuthenticated_exercise,
   authorize_exercise,
-  exercise: { _id, description, name, user, date },
+  exercise: { _id, description, name, user, date, answers, correct_users },
   deleteExercise,
   showActions
 }) => {
@@ -57,6 +57,14 @@ const ExerciseItem = ({
                     value={password}
                     onChange={e => onChange(e)}
                   />
+                </div>
+                <div className="">
+                  {answers.length > 0 && (
+                    <span>
+                      {correct_users.length} out of {answers.length} answered
+                      correctly
+                    </span>
+                  )}
                 </div>
                 <input
                   type="submit"

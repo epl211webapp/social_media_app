@@ -8,7 +8,7 @@ import PostItem from "../posts/PostItem";
 import CommentForm from "../post/CommentForm";
 import CommentItem from "../post/CommentItem";
 
-import { getPost, getPosts } from "../../actions/post";
+import { getPost } from "../../actions/post";
 
 const Post = ({ getPost, post: { post, loading }, match }) => {
   useEffect(() => {
