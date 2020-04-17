@@ -15,6 +15,8 @@ import Posts from "./components/posts/Posts";
 import Post from "./components/post/Post";
 import Exercises from "./components/exercises/Exercises";
 import Exercise from "./components/exercise/Exercise";
+import ExerciseChoose from "./components/exercises/ExerciseChoose";
+import ExerciseCreate from "./components/exercises/ExerciseCreate";
 
 import PrivateRoute from "./components/routing/PrivateRoute";
 
@@ -47,6 +49,16 @@ const App = () => {
               <Route exact path="/login" component={Login} />
               <Route exact path="/profiles" component={Profiles} />
               <Route exact path="/profile/:id" component={Profile} />
+              <PrivateRoute
+                exact
+                path="/exercise_choice"
+                component={ExerciseChoose}
+              />
+              <PrivateRoute
+                exact
+                path="/exercise_create"
+                component={ExerciseCreate}
+              />
               <PrivateRoute exact path="/exercises" component={Exercises} />
               <PrivateRoute exact path="/exercises/:id" component={Exercise} />
 

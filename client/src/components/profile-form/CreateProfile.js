@@ -10,15 +10,15 @@ const CreateProfile = ({ createProfile, history }) => {
     website: "",
     status: "",
     skills: "",
-    bio: ""
+    bio: "",
   });
 
   const { company, status, bio } = formData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     createProfile(formData, history);
   };
@@ -32,9 +32,9 @@ const CreateProfile = ({ createProfile, history }) => {
           your profile stand out
         </p>
         <small>* = required field</small>
-        <form className="form" onSubmit={e => onSubmit(e)}>
+        <form className="form" onSubmit={(e) => onSubmit(e)}>
           <div className="form-group">
-            <select name="status" value={status} onChange={e => onChange(e)}>
+            <select name="status" value={status} onChange={(e) => onChange(e)}>
               <option value="0">* Select Status</option>
               <option value="Student or Learning">Student or Learning</option>
               <option value="Instructor">Instructor or Teacher</option>
@@ -50,7 +50,7 @@ const CreateProfile = ({ createProfile, history }) => {
               placeholder="University"
               name="company"
               value={company}
-              onChange={e => onChange(e)}
+              onChange={(e) => onChange(e)}
             />
             <small className="form-text">
               Could be your own company or one you work for
@@ -108,7 +108,7 @@ const CreateProfile = ({ createProfile, history }) => {
               placeholder="A short bio of yourself"
               name="bio"
               value={bio}
-              onChange={e => onChange(e)}
+              onChange={(e) => onChange(e)}
             ></textarea>
             <small className="form-text">Tell us a little about yourself</small>
           </div>
@@ -125,8 +125,8 @@ const CreateProfile = ({ createProfile, history }) => {
 
 CreateProfile.propTypes = {};
 
-const mapStateToProps = state => ({
-  createProfile: PropTypes.func.isRequired
+const mapStateToProps = (state) => ({
+  createProfile: PropTypes.func.isRequired,
 });
 
 export default connect(mapStateToProps, { createProfile })(

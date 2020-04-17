@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import {
   getExercise,
   addAnswer,
-  addCorrectAnswerByUser
+  addCorrectAnswerByUser,
 } from "../../actions/exercise";
 
 const Exercise = ({
@@ -25,9 +25,10 @@ const Exercise = ({
     choiceB,
     choiceC,
     choiceD,
-    correct_choice
+    correct_choice,
+    chapter,
   },
-  match
+  match,
 }) => {
   useEffect(() => {
     getExercise(match.params.id);
@@ -35,10 +36,10 @@ const Exercise = ({
 
   const [answer, setAnswer] = useState("");
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     const answer_json = {
-      answer: answer
+      answer: answer,
     };
     addAnswer(_id, answer_json);
     if (answer === correct_choice) {
@@ -55,7 +56,7 @@ const Exercise = ({
       </Link>
       <div className=" bg-white p-1 my-1">
         <h1>{description}</h1>
-        <form onSubmit={e => onSubmit(e)}>
+        <form onSubmit={(e) => onSubmit(e)}>
           {choiceA !== null ? (
             <label class="container_radio">
               {choiceA}
@@ -63,7 +64,7 @@ const Exercise = ({
                 type="radio"
                 name="answer"
                 value={choiceA}
-                onChange={e => setAnswer(e.target.value)}
+                onChange={(e) => setAnswer(e.target.value)}
               />
               <span class="checkmark"></span>
             </label>
@@ -75,7 +76,7 @@ const Exercise = ({
                 type="radio"
                 name="answer"
                 value={choiceB}
-                onChange={e => setAnswer(e.target.value)}
+                onChange={(e) => setAnswer(e.target.value)}
               />
               <span class="checkmark"></span>
             </label>
@@ -87,7 +88,7 @@ const Exercise = ({
                 type="radio"
                 name="answer"
                 value={choiceC}
-                onChange={e => setAnswer(e.target.value)}
+                onChange={(e) => setAnswer(e.target.value)}
               />
               <span class="checkmark"></span>
             </label>
@@ -99,7 +100,7 @@ const Exercise = ({
                 type="radio"
                 name="answer"
                 value={choiceD}
-                onChange={e => setAnswer(e.target.value)}
+                onChange={(e) => setAnswer(e.target.value)}
               />
               <span class="checkmark"></span>
             </label>
@@ -116,15 +117,15 @@ Exercise.propTypes = {
   addAnswer: PropTypes.func.isRequired,
   addCorrectAnswerByUser: PropTypes.func.isRequired,
 
-  exercise: PropTypes.object.isRequired
+  exercise: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  exercise: state.exercise
+const mapStateToProps = (state) => ({
+  exercise: state.exercise,
 });
 
 export default connect(mapStateToProps, {
   getExercise,
   addAnswer,
-  addCorrectAnswerByUser
+  addCorrectAnswerByUser,
 })(Exercise);

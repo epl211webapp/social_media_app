@@ -10,13 +10,16 @@ const ExerciseForm = ({ addExercise }) => {
     choiceB: "",
     choiceC: "",
     choiceD: "",
-    correct_choice: ""
+    chapter: "Regular Languages",
+
+    correct_choice: "",
+    password: "",
   });
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
     addExercise(formData);
@@ -27,7 +30,9 @@ const ExerciseForm = ({ addExercise }) => {
       <form
         className="form purple my-1"
         enctype="multipart/formd-data"
-        onSubmit={e => onSubmit(e)}
+        onSubmit={(e) => {
+          onSubmit(e);
+        }}
       >
         <div className="form-group">
           <textarea
@@ -36,7 +41,7 @@ const ExerciseForm = ({ addExercise }) => {
             rows="5"
             placeholder="Description of exercise"
             value={formData.description}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           ></textarea>
         </div>
         <div className="form-group">
@@ -47,7 +52,7 @@ const ExerciseForm = ({ addExercise }) => {
             rows="5"
             placeholder="Choice A"
             value={formData.choiceA}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           ></textarea>
         </div>
         <div className="form-group">
@@ -58,7 +63,7 @@ const ExerciseForm = ({ addExercise }) => {
             rows="5"
             placeholder="Choice B"
             value={formData.choiceB}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           ></textarea>
         </div>
         <div className="form-group">
@@ -69,7 +74,7 @@ const ExerciseForm = ({ addExercise }) => {
             rows="5"
             placeholder="Choice C"
             value={formData.choiceC}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           ></textarea>
         </div>
         <div className="form-group">
@@ -80,7 +85,7 @@ const ExerciseForm = ({ addExercise }) => {
             rows="5"
             placeholder="Choice D"
             value={formData.choiceD}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           ></textarea>
         </div>
         <div className="form-group">
@@ -91,8 +96,31 @@ const ExerciseForm = ({ addExercise }) => {
             rows="5"
             placeholder="Correct choice"
             value={formData.correct_choice}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           ></textarea>
+        </div>
+
+        <div className="form-group">
+          <select
+            className="exerciseTextareas"
+            name="chapter"
+            cols="30"
+            rows="5"
+            placeholder="Chapter"
+            value={formData.chapter}
+            onChange={(e) => onChange(e)}
+          >
+            <option value="Regular Languages">Regular Languages</option>
+            <option value="Context Free Languages">
+              Context Free Languages
+            </option>
+            <option value="The Church Turing Thesis">
+              The Church Turing Thesis
+            </option>
+            <option value="Decidability">Decidability</option>
+            <option value="Reducability">Reducability</option>
+            <option value="Time Complexity">Time Complexity</option>
+          </select>
         </div>
         {/*<div className="form-group">
           <div className="custom-file">
@@ -115,7 +143,7 @@ const ExerciseForm = ({ addExercise }) => {
             rows="5"
             placeholder="Password"
             value={formData.password}
-            onChange={e => onChange(e)}
+            onChange={(e) => onChange(e)}
           ></textarea>
         </div>
         <input type="submit" class="btn btn-dark my-1" value="Submit" />
@@ -125,7 +153,7 @@ const ExerciseForm = ({ addExercise }) => {
 };
 
 ExerciseForm.propTypes = {
-  addExercise: PropTypes.func.isRequired
+  addExercise: PropTypes.func.isRequired,
 };
 
 export default connect(null, { addExercise })(ExerciseForm);

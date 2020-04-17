@@ -14,14 +14,7 @@ const Exercise = require("../../models/Exercise");
 
 router.post(
   "/",
-  [
-    auth,
-    [
-      check("description", "Description is required")
-        .not()
-        .isEmpty()
-    ]
-  ],
+  [auth, [check("description", "Description is required").not().isEmpty()]],
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -38,10 +31,11 @@ router.post(
         choiceC: req.body.choiceC,
         choiceD: req.body.choiceD,
         correct_choice: req.body.correct_choice,
+        chapter: req.body.chapter,
         password: req.body.password,
         name: user.name,
         avatar: user.avatar,
-        user: req.user.id
+        user: req.user.id,
       });
 
       const salt = await bcrypt.genSalt(10);
@@ -167,14 +161,15 @@ router.post("/answer/:id", auth, async (req, res) => {
 
     //Check if the exercise has already been answered
     if (
-      exercise.answers.filter(answer => answer.user.toString() === req.user.id)
-        .length > 0
+      exercise.answers.filter(
+        (answer) => answer.user.toString() === req.user.id
+      ).length > 0
     ) {
       return res.status(400).json({ msg: "Exercise already asnwered" });
     }
     const newAnswer = {
       user: req.user.id,
-      answer: req.body.answer
+      answer: req.body.answer,
     };
     exercise.answers.unshift(newAnswer);
 
@@ -198,7 +193,7 @@ router.put("/correct_users/:id", auth, async (req, res) => {
     //Check if the post has already been liked
     if (
       exercise.correct_users.filter(
-        correct_user => correct_users.user.toString() === req.user.id
+        (correct_user) => correct_users.user.toString() === req.user.id
       ).length > 0
     ) {
       return res

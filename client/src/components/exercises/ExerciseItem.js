@@ -6,24 +6,41 @@ import { connect } from "react-redux";
 import { deleteExercise } from "../../actions/exercise";
 import { authorize_exercise } from "../../actions/exercise";
 
+import CanvasJSReact from "./canvasjs.react";
+//var CanvasJSReact = require('./canvasjs.react');
+//var CanvasJS = CanvasJSReact.CanvasJS;
+var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+
 const ExerciseItem = ({
   auth,
   isAuthenticated_exercise,
   authorize_exercise,
-  exercise: { _id, description, name, user, date, answers, correct_users },
+  exercise: {
+    _id,
+    description,
+    choiceA,
+    choiceB,
+    choiceC,
+    choiceD,
+    name,
+    user,
+    date,
+    answers,
+    correct_users,
+  },
   deleteExercise,
-  showActions
+  showActions,
 }) => {
   const [formData, setFormData] = useState({
-    password: ""
+    password: "",
   });
 
   const { password } = formData;
 
-  const onChange = e =>
+  const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     authorize_exercise(_id, password);
@@ -32,7 +49,41 @@ const ExerciseItem = ({
   if (isAuthenticated_exercise) {
     return <Redirect to={`/exercises/${_id}`} />;
   }
+  let counter_choiceA = 0,
+    counter_choiceB = 0,
+    counter_choiceC = 0,
+    counter_choiceD = 0;
 
+  let stringify = answers;
+  for (let i = 0; i < stringify.length; i++) {
+    let choice = stringify[i]["answer"];
+    if (choice === choiceA) {
+      counter_choiceA++;
+    } else if (choice === choiceB) {
+      counter_choiceB++;
+    } else if (choice === choiceC) {
+      counter_choiceC++;
+    } else if (choice === choiceD) {
+      counter_choiceD++;
+    }
+  }
+
+  const options = {
+    title: {
+      text: "Results from answers",
+    },
+    data: [
+      {
+        type: "column",
+        dataPoints: [
+          { label: choiceA === null ? "" : choiceA, y: counter_choiceA },
+          { label: choiceB, y: counter_choiceB },
+          { label: choiceC, y: counter_choiceC },
+          { label: choiceD, y: choiceD === null ? null : counter_choiceD },
+        ],
+      },
+    ],
+  };
   return (
     <Fragment>
       <div class="post bg-white p-1 my-1">
@@ -48,22 +99,24 @@ const ExerciseItem = ({
 
           {showActions && (
             <Fragment>
-              <form className="form" onSubmit={e => onSubmit(e)}>
+              <form className="form" onSubmit={(e) => onSubmit(e)}>
                 <div className="form-group">
                   <input
                     type="password"
                     placeholder="Password"
                     name="password"
                     value={password}
-                    onChange={e => onChange(e)}
+                    onChange={(e) => onChange(e)}
                   />
                 </div>
                 <div className="">
                   {answers.length > 0 && (
-                    <span>
-                      {correct_users.length} out of {answers.length} answered
-                      correctly
-                    </span>
+                    <div>
+                      <CanvasJSChart
+                        options={options}
+                        /* onRef = {ref => this.chart = ref} */
+                      />
+                    </div>
                   )}
                 </div>
                 <input
@@ -74,7 +127,7 @@ const ExerciseItem = ({
               </form>
               {!auth.loading && user === auth.user._id && (
                 <button
-                  onClick={e => deleteExercise(_id)}
+                  onClick={(e) => deleteExercise(_id)}
                   type="button"
                   class="btn btn-danger"
                 >
@@ -90,7 +143,7 @@ const ExerciseItem = ({
 };
 
 ExerciseItem.defaultProps = {
-  showActions: true
+  showActions: true,
 };
 
 ExerciseItem.propTypes = {
@@ -98,12 +151,12 @@ ExerciseItem.propTypes = {
   authorize_exercise: PropTypes.func.isRequired,
   isAuthenticated_exercise: PropTypes.bool,
   auth: PropTypes.object.isRequired,
-  deleteExercise: PropTypes.func.isRequired
+  deleteExercise: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  isAuthenticated_exercise: state.exercise.isAuthenticated_exercise
+  isAuthenticated_exercise: state.exercise.isAuthenticated_exercise,
 });
 
 export default connect(mapStateToProps, { deleteExercise, authorize_exercise })(

@@ -15,27 +15,31 @@ const Exercises = ({ getExercises, exercise: { exercises, loading } }) => {
 
   const [displayExerciseInputs, toggleExerciseInputs] = React.useState(false);
 
-  const chapters = [
-    "Regular Languages",
-    "Context Free Languages",
-    "The Church Turing Thesis",
-    "Decidability",
-    "Reducability",
-    "Time Complexity",
-  ];
   return loading ? (
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className="large text-primary">Exercises</h1>
-      <p className="lead">
-        <i className="fas fa-user">Select exercise to solve</i>
-      </p>
       <div class="my-2">
-        {chapters.map((chapter, index) => {
-          return <ExerciseChapterButton index={index} chapter={chapter} />;
-        })}
+        <button
+          onClick={() => toggleExerciseInputs(!displayExerciseInputs)}
+          type="button"
+          class="btn btn-light"
+        >
+          {displayExerciseInputs ? (
+            <h1>
+              Click to dismiss "Create exercise" or to reset the input fields{" "}
+            </h1>
+          ) : (
+            <h1>Click here to create your own exercise</h1>
+          )}
+        </button>
       </div>
+      {displayExerciseInputs && (
+        <Fragment>
+          {" "}
+          <ExerciseForm />
+        </Fragment>
+      )}
     </Fragment>
   );
 };

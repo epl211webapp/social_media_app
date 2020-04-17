@@ -5,16 +5,21 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { getCurrentProfile, deleteAccount } from "../../actions/profile";
 import Spinner from "../layout/Spinner";
+import { getExercises } from "../../actions/exercise";
 
 const Dashboard = ({
+  getExercises,
+  exercise: { exercises },
   getCurrentProfile,
   deleteAccount,
   auth: { user },
-  profile: { profile, loading }
+
+  profile: { profile, loading },
 }) => {
   useEffect(() => {
     getCurrentProfile();
-  }, [getCurrentProfile]);
+    getExercises();
+  }, [getCurrentProfile, getExercises]);
   return loading && profile === null ? (
     <Spinner />
   ) : (
@@ -38,6 +43,22 @@ const Dashboard = ({
               Delete My Account
             </button>
           </div>
+          <div className="exercises">
+            <h1>Exercises this user has completed</h1>
+            {exercises.map((exercise) => {
+              //console.log(exercise.answers);
+              return exercise.answers.map((answer) => {
+                if (answer.user === user._id) {
+                  return (
+                    <Fragment>
+                      <h5>{exercise.description}</h5>
+                      <br />
+                    </Fragment>
+                  );
+                }
+              });
+            })}
+          </div>
         </Fragment>
       ) : (
         <Fragment>
@@ -52,17 +73,22 @@ const Dashboard = ({
 };
 
 Dashboard.propTypes = {
+  getExercises: PropTypes.func.isRequired,
   getCurrentProfile: PropTypes.func.isRequired,
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
+  exercise: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   auth: state.auth,
-  profile: state.profile
+  profile: state.profile,
+  exercise: state.exercise,
 });
 
-export default connect(mapStateToProps, { getCurrentProfile, deleteAccount })(
-  Dashboard
-);
+export default connect(mapStateToProps, {
+  getCurrentProfile,
+  deleteAccount,
+  getExercises,
+})(Dashboard);
