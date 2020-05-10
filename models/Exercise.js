@@ -1,3 +1,8 @@
+/*
+This Model contains the properties of the exercises
+
+*/
+
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
@@ -32,6 +37,12 @@ const ExerciseSchema = new Schema({
     type: String,
   },
   password: {
+    type: String,
+  },
+  in_class_or_home: {
+    type: String,
+  },
+  week: {
     type: String,
   },
   chapter: {

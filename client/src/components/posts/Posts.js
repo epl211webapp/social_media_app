@@ -1,3 +1,8 @@
+/*
+Posts.js is the actual pages with all the posts and the Post Items in them. 
+
+*/
+
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -21,7 +26,7 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
       </p>
       <PostForm />
       <div className="posts">
-        {Array.from(posts).map(post => (
+        {Array.from(posts).map((post) => (
           <PostItem key={post._id} post={post} />
         ))}
       </div>
@@ -31,10 +36,10 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
 
 Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  post: state.post
+const mapStateToProps = (state) => ({
+  post: state.post,
 });
 export default connect(mapStateToProps, { getPosts })(Posts);

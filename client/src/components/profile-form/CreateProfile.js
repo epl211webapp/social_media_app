@@ -1,3 +1,9 @@
+/*
+1)CreateProfile.js is the component that contains the form for creating a profile 
+and includes all the required fields (e.g. status, thoughts etc.) 
+
+*/
+
 import React, { Fragment, useState } from "react";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";

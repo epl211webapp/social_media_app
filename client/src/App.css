@@ -1,4 +1,10 @@
 /* Global Styles */
+
+/*
+App.css contains all the styling for the web application. 
+Every styling (e.g. fonts, alignments, colours etc) are all included in this file and not on the individual components.  
+
+*/
 :root {
   --primary-color: #35d357;
   --dark-color: #0d0f11;
@@ -241,6 +247,43 @@ img {
 /* Forms */
 .form .form-group {
   margin: 1.2rem 0;
+}
+
+.form .form-small-input {
+  width: 300px;
+  margin: 0.5 rem 0;
+}
+.form .form-group .red {
+  margin: 1.2rem 0;
+  background-color: #ff8a9e;
+}
+.red {
+  background-color: #ff8a9e;
+}
+.form .form-group .blue {
+  margin: 1.2rem 0;
+  background-color: #775cff;
+}
+
+.blue {
+  background-color: #775cff;
+}
+.form .form-group .green {
+  margin: 1.2rem 0;
+  background-color: #00a81b;
+}
+
+.green {
+  background-color: #00a81b;
+}
+
+.form .form-group .orange {
+  margin: 1.2rem 0;
+  background-color: #e3a200;
+}
+
+.orange {
+  background-color: #e3a200;
 }
 
 .form .form-text {

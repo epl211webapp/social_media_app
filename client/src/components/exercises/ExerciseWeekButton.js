@@ -11,11 +11,11 @@ import ExerciseItem from "./ExerciseItem";
 
 import { getExercises } from "../../actions/exercise";
 
-const ExerciseChapterButton = ({
+const ExerciseWeekButton = ({
   getExercises,
   exercise: { exercises },
+  week,
   in_class_or_home,
-  chapter,
   index,
 }) => {
   useEffect(() => {
@@ -34,14 +34,14 @@ const ExerciseChapterButton = ({
         type="button"
         class="btn btn-light"
       >
-        {displayExercise ? <h1>Dismiss {chapter}</h1> : <h1>{chapter}</h1>}
+        {displayExercise ? <h1>Dismiss Week {week}</h1> : <h1>Week {week}</h1>}
       </button>
       {displayExercise ? (
         <div className="exercises">
           {exercises
             .filter(
               (exercise) =>
-                exercise.chapter === chapter &&
+                exercise.week === week &&
                 exercise.in_class_or_home === in_class_or_home
             )
             .map((exercise, index) => (
@@ -59,7 +59,7 @@ const ExerciseChapterButton = ({
   );
 };
 
-ExerciseChapterButton.propTypes = {
+ExerciseWeekButton.propTypes = {
   getExercises: PropTypes.func.isRequired,
   exercise: PropTypes.object.isRequired,
 };
@@ -68,6 +68,4 @@ const mapStateToProps = (state) => ({
   exercise: state.exercise,
 });
 
-export default connect(mapStateToProps, { getExercises })(
-  ExerciseChapterButton
-);
+export default connect(mapStateToProps, { getExercises })(ExerciseWeekButton);

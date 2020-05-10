@@ -1,11 +1,18 @@
 import { SET_ALERT, REMOVE_ALERT } from "./types";
 import uuid from "uuid";
 
-export const setAlert = (msg, alertType, timeout = 5000) => dispatch => {
+/*
+This is the action for the alert,
+the functions receives a type of alert and the time in milliseconds of 
+how long an alert will stay on the page
+Examples of alerts include: Wrong Password, Post added etc.
+
+*/
+export const setAlert = (msg, alertType, timeout = 5000) => (dispatch) => {
   const id = uuid.v4();
   dispatch({
     type: SET_ALERT,
-    payload: { msg, alertType, id }
+    payload: { msg, alertType, id },
   });
 
   setTimeout(() => dispatch({ type: REMOVE_ALERT, payload: id }), timeout);

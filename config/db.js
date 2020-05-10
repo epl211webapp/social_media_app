@@ -1,3 +1,5 @@
+/*db.js is the file related with the database configuration */
+
 const mongoose = require("mongoose");
 
 const config = require("config");
@@ -8,7 +10,7 @@ const connectDB = async () => {
     await mongoose.connect(db, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      useCreateIndex: true
+      useCreateIndex: true,
     });
 
     console.log("MongoDB Connected...");

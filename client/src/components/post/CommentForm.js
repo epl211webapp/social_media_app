@@ -1,3 +1,9 @@
+/*
+1)CommentForm.js contains the form for creating a comment under a post. 
+The form includes a text input field for the comment 
+
+*/
+
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -13,7 +19,7 @@ const CommentForm = ({ postId, addComment }) => {
       </div>
       <form
         class="form my-1"
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           addComment(postId, { text });
           setText("");
@@ -25,7 +31,7 @@ const CommentForm = ({ postId, addComment }) => {
           rows="5"
           placeholder="Create a post"
           value={text}
-          onChange={e => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
           required
         ></textarea>
         <input type="submit" class="btn btn-dark my-1" value="Submit" />
@@ -35,7 +41,7 @@ const CommentForm = ({ postId, addComment }) => {
 };
 
 CommentForm.propTypes = {
-  addComment: PropTypes.func.isRequired
+  addComment: PropTypes.func.isRequired,
 };
 
 export default connect(null, { addComment })(CommentForm);

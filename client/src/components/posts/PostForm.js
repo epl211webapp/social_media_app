@@ -1,3 +1,9 @@
+/*
+1)PostForm.js contains the form for creating a post. 
+The form includes a text input field for the post. 
+
+*/
+
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -13,7 +19,7 @@ const PostForm = ({ addPost }) => {
       </div>
       <form
         class="form my-1"
-        onSubmit={e => {
+        onSubmit={(e) => {
           e.preventDefault();
           addPost({ text });
           setText("");
@@ -25,7 +31,7 @@ const PostForm = ({ addPost }) => {
           rows="5"
           placeholder="Create a post"
           value={text}
-          onChange={e => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
           required
         ></textarea>
         <input type="submit" class="btn btn-dark my-1" value="Submit" />
@@ -35,7 +41,7 @@ const PostForm = ({ addPost }) => {
 };
 
 PostForm.propTypes = {
-  addPost: PropTypes.func.isRequired
+  addPost: PropTypes.func.isRequired,
 };
 
 export default connect(null, { addPost })(PostForm);

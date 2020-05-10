@@ -1,3 +1,8 @@
+/*
+Profile.js is the component that has the page that displays the profile of a certain user  
+
+*/
+
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -11,7 +16,7 @@ const Profile = ({
   getProfileById,
   profile: { profile, loading },
   auth,
-  match
+  match,
 }) => {
   useEffect(() => {
     getProfileById(match.params.id);
@@ -45,11 +50,11 @@ const Profile = ({
 Profile.propTypes = {
   getProfileById: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   profile: state.profile,
-  auth: state.auth
+  auth: state.auth,
 });
 export default connect(mapStateToProps, { getProfileById })(Profile);

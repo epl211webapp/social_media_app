@@ -1,3 +1,9 @@
+/*
+The index.js in reducers is the reducer's combine file
+
+
+*/
+
 import { combineReducers } from "redux";
 import alert from "./alert";
 import auth from "./auth";
@@ -10,5 +16,5 @@ export default combineReducers({
   auth,
   profile,
   post,
-  exercise
+  exercise,
 });

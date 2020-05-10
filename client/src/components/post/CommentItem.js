@@ -1,3 +1,9 @@
+/*
+2)CommentItem.js is the component that displays a comment that has been posted, 
+with all the authorization that is needed in order for user that has created a certain comment to delete it.  
+
+*/
+
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -9,7 +15,7 @@ const CommentItem = ({
   postId,
   deleteComment,
   auth,
-  comment: { _id, text, name, avatar, user, date }
+  comment: { _id, text, name, avatar, user, date },
 }) => (
   <div class="post bg-white p-1 my-1">
     <div>
@@ -25,7 +31,7 @@ const CommentItem = ({
       </p>
       {!auth.loading && user === auth.user._id && (
         <button
-          onClick={e => deleteComment(postId, _id)}
+          onClick={(e) => deleteComment(postId, _id)}
           type="button"
           className="btn btn-danger"
         >
@@ -40,10 +46,10 @@ CommentItem.propTypes = {
   postId: PropTypes.number.isRequired,
   comment: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  deleteComment: PropTypes.func.isRequired
+  deleteComment: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 export default connect(mapStateToProps, { deleteComment })(CommentItem);

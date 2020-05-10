@@ -1,3 +1,8 @@
+/*
+Comment above each function of what RESTful endpoint it runs
+
+*/
+
 const express = require("express");
 const router = express.Router();
 const auth = require("../../middleware/auth");
@@ -14,7 +19,7 @@ const Post = require("../../models/Post");
 router.get("/me", auth, async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.user.id
+      user: req.user.id,
     }).populate("user", ["name", "avatar"]);
 
     if (!profile) {
@@ -36,7 +41,7 @@ router.get("/me", auth, async (req, res) => {
 router.post(
   "/",
   [
-    auth
+    auth,
     /*[
       check("status", "Status is required")
         .not()
@@ -63,7 +68,7 @@ router.post(
       facebook,
       twitter,
       instagram,
-      linkedin
+      linkedin,
     } = req.body;
 
     //Build profile object
@@ -75,7 +80,7 @@ router.post(
     if (bio) profileFields.bio = bio;
     if (status) profileFields.status = status;
     if (skills) {
-      profileFields.skills = skills.split(",").map(skill => skill.trim());
+      profileFields.skills = skills.split(",").map((skill) => skill.trim());
     }
 
     //Build social object
@@ -130,7 +135,7 @@ router.get("/", async (req, res) => {
 router.get("/user/:user_id", async (req, res) => {
   try {
     const profile = await Profile.findOne({
-      user: req.params.user_id
+      user: req.params.user_id,
     }).populate("user", ["name", "avatar"]);
 
     if (!profile) return res.status(400).json({ msg: "Profile not found" });
@@ -164,6 +169,7 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
+/*
 // @route  PUT api/profile/experience
 // @desc   Add profile experience
 // @access Private
@@ -329,5 +335,5 @@ router.delete("/education/:exp_id", auth, async (req, res) => {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
-});
+}); */
 module.exports = router;

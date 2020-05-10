@@ -1,3 +1,8 @@
+/*
+4)Spinner.js is the component for the spinner effect when a page is loading data from the database. 
+
+*/
+
 import React, { Fragment } from "react";
 import spinner from "./spinner.gif";
 

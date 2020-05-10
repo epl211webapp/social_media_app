@@ -1,6 +1,12 @@
 import axios from "axios";
 import { setAlert } from "./alert";
 
+/*
+This action file is for the exercises.
+It contains the action functions for getting all exercises, deleting, creating etc.
+Explanations of the functions above each function.
+
+*/
 import {
   GET_EXERCISES,
   EXERCISE_ERROR,
@@ -10,52 +16,52 @@ import {
   EXERCISE_ACCESS,
   EXERCISE_ACCESS_ERROR,
   UPDATE_ANSWERS,
-  CORRECT_CHOICE_USER
+  CORRECT_CHOICE_USER,
 } from "./types";
 
-//Get exercises
-export const getExercises = () => async dispatch => {
+//Get exercises, awaiting an answer to the response from axios
+export const getExercises = () => async (dispatch) => {
   try {
     const res = await axios.get("/api/exercises");
 
     dispatch({
       type: GET_EXERCISES,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
       type: EXERCISE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
 
-//Delete exercise
+//Delete exercise given an id in the axios request
 
-export const deleteExercise = id => async dispatch => {
+export const deleteExercise = (id) => async (dispatch) => {
   try {
     const res = await axios.delete(`/api/exercises/${id}`);
     console.log(res);
     dispatch({
       type: DELETE_EXERCISE,
-      payload: id
+      payload: id,
     });
 
     dispatch(setAlert("Exercise Removed", "success"));
   } catch (err) {
     dispatch({
       type: EXERCISE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
 
-//Add exercise
-export const addExercise = formData => async dispatch => {
+//Add a new exercise to the exercises endpoint
+export const addExercise = (formData) => async (dispatch) => {
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
 
   try {
@@ -63,23 +69,24 @@ export const addExercise = formData => async dispatch => {
 
     dispatch({
       type: ADD_EXERCISE,
-      payload: res.data
+      payload: res.data,
     });
 
     dispatch(setAlert("Exercise Created", "success"));
   } catch (err) {
     dispatch({
       type: EXERCISE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
 
-export const addAnswer = (id, formData) => async dispatch => {
+//Add answer to a specific answer by id
+export const addAnswer = (id, formData) => async (dispatch) => {
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
 
   try {
@@ -91,7 +98,7 @@ export const addAnswer = (id, formData) => async dispatch => {
 
     dispatch({
       type: UPDATE_ANSWERS,
-      payload: res.data
+      payload: res.data,
     });
 
     dispatch(setAlert("Answer Added", "success"));
@@ -99,55 +106,58 @@ export const addAnswer = (id, formData) => async dispatch => {
     dispatch(
       {
         type: EXERCISE_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status }
+        payload: { msg: err.response.statusText, status: err.response.status },
       },
       setAlert("Answer already answered", "warning")
     );
   }
 };
 
-export const addCorrectAnswerByUser = id => async dispatch => {
+//Add the correct answers by each user
+//not used in the web application
+export const addCorrectAnswerByUser = (id) => async (dispatch) => {
   try {
     const res = await axios.put(`/api/exercises/correct_users/${id}`);
     console.log(res);
     dispatch({
       type: CORRECT_CHOICE_USER,
-      payload: { id }
+      payload: { id },
     });
   } catch (err) {
     dispatch(
       {
         type: EXERCISE_ERROR,
-        payload: { msg: err.response.statusText, status: err.response.status }
+        payload: { msg: err.response.statusText, status: err.response.status },
       },
       setAlert("You have already answered this question", "danger")
     );
   }
 };
 
-//Enter exercise
-export const getExercise = id => async dispatch => {
+//Get an exercises give by the id in the API
+export const getExercise = (id) => async (dispatch) => {
   try {
     const res = await axios.get(`/api/exercises/${id}`);
 
     dispatch({
       type: GET_EXERCISE,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     dispatch({
       type: EXERCISE_ERROR,
-      payload: { msg: err.response.statusText, status: err.response.status }
+      payload: { msg: err.response.statusText, status: err.response.status },
     });
   }
 };
 
-//Authorize exercise
-export const authorize_exercise = (id, password) => async dispatch => {
+//Authorize exercise given the password for the certain exercise
+//else if the password is wrong then an alert is dispatched
+export const authorize_exercise = (id, password) => async (dispatch) => {
   const config = {
     headers: {
-      "Content-Type": "application/json"
-    }
+      "Content-Type": "application/json",
+    },
   };
 
   const body = JSON.stringify({ password });
@@ -157,16 +167,16 @@ export const authorize_exercise = (id, password) => async dispatch => {
 
     dispatch({
       type: EXERCISE_ACCESS,
-      payload: res.data
+      payload: res.data,
     });
   } catch (err) {
     const errors = err.response.data.errors;
 
     if (errors) {
-      errors.forEach(error => dispatch(setAlert(error.msg, "danger")));
+      errors.forEach((error) => dispatch(setAlert(error.msg, "danger")));
     }
     dispatch({
-      type: EXERCISE_ACCESS_ERROR
+      type: EXERCISE_ACCESS_ERROR,
     });
   }
 };

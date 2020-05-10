@@ -1,3 +1,8 @@
+/*
+Comment above each function of what RESTful endpoint it runs
+
+*/
+
 const express = require("express");
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
@@ -31,6 +36,8 @@ router.post(
         choiceC: req.body.choiceC,
         choiceD: req.body.choiceD,
         correct_choice: req.body.correct_choice,
+        in_class_or_home: req.body.in_class_or_home,
+        week: req.body.week,
         chapter: req.body.chapter,
         password: req.body.password,
         name: user.name,

@@ -1,9 +1,12 @@
+/*
+ExerciseCreate.js contains the page for the form that contains the form that you can create an exercise.  
+
+*/
+
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import ExerciseItem from "./ExerciseItem";
-import ExerciseChapterButton from "./ExerciseChapterButton";
 
 import ExerciseForm from "./ExerciseForm";
 import { getExercises } from "../../actions/exercise";

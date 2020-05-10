@@ -1,3 +1,13 @@
+/*
+
+App.js is a very important file.
+ This is where we put all the components which 
+ are to be pages with a URL (e.g. /exercises redirects to the exercises component). 
+ Here are also the Provider tag, which is tasked with passing down the store for Redux. 
+There is also the Router tag, which is responsible for the routing for the pages.  
+
+*/
+
 import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
@@ -17,6 +27,7 @@ import Exercises from "./components/exercises/Exercises";
 import Exercise from "./components/exercise/Exercise";
 import ExerciseChoose from "./components/exercises/ExerciseChoose";
 import ExerciseCreate from "./components/exercises/ExerciseCreate";
+import ExercisesClass from "./components/exercises/ExercisesClass";
 
 import PrivateRoute from "./components/routing/PrivateRoute";
 
@@ -61,6 +72,11 @@ const App = () => {
               />
               <PrivateRoute exact path="/exercises" component={Exercises} />
               <PrivateRoute exact path="/exercises/:id" component={Exercise} />
+              <PrivateRoute
+                exact
+                path="/exercises_class"
+                component={ExercisesClass}
+              />
 
               <PrivateRoute exact path="/posts" component={Posts} />
               <PrivateRoute exact path="/posts/:id" component={Post} />

@@ -1,3 +1,9 @@
+/*
+Store.js is where the store for Redux initialized, 
+created and finally exported to the application. 
+
+*/
+
 import { createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunk from "redux-thunk";

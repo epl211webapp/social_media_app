@@ -1,3 +1,10 @@
+/*
+2)Landing.js is the page, which the user views when he first visits the website (the homepage), 
+before he logins or registers. 
+That is why there are buttons on this component prompting him to login or register. 
+
+*/
+
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";

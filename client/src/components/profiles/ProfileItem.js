@@ -1,3 +1,9 @@
+/*
+1)ProfileItem.js is the component 
+that represents box that contains a profile(e.g. username etc) in the Profiles page of the web application 
+
+*/
+
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
@@ -7,8 +13,8 @@ const ProfileItem = ({
     user: { _id, name, avatar },
     status,
     location,
-    skills
-  }
+    skills,
+  },
 }) => {
   return (
     <div className="profile bg-light">
@@ -33,7 +39,7 @@ const ProfileItem = ({
 };
 
 ProfileItem.propTypes = {
-  profile: PropTypes.object.isRequired
+  profile: PropTypes.object.isRequired,
 };
 
 export default ProfileItem;

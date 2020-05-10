@@ -1,3 +1,10 @@
+/*
+The types of actions this reducer deals with get all exercises, exercises error, add, get ,delete 
+exercise. Also there is an exercise access, exercise access error, update answers and correct choice user
+
+
+*/
+
 import {
   GET_EXERCISES,
   EXERCISE_ERROR,
@@ -7,7 +14,7 @@ import {
   EXERCISE_ACCESS,
   EXERCISE_ACCESS_ERROR,
   UPDATE_ANSWERS,
-  CORRECT_CHOICE_USER
+  CORRECT_CHOICE_USER,
 } from "../actions/types";
 
 const initialState = {
@@ -15,10 +22,10 @@ const initialState = {
   exercise: null,
   loading: true,
   isAuthenticated_exercise: null,
-  error: {}
+  error: {},
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
@@ -27,65 +34,67 @@ export default function(state = initialState, action) {
         ...state,
         exercises: payload,
         loading: false,
-        isAuthenticated_exercise: false
+        isAuthenticated_exercise: false,
       };
     case EXERCISE_ACCESS:
       return {
         ...state,
         ...payload,
         isAuthenticated_exercise: true,
-        loading: false
+        loading: false,
       };
     case UPDATE_ANSWERS:
       return {
         ...state,
-        exercises: state.exercises.map(exercise =>
+        exercises: state.exercises.map((exercise) =>
           exercise._id === payload.id
             ? { ...exercise, answers: payload.answers }
             : exercise
         ),
-        loading: false
+        loading: false,
       };
     case CORRECT_CHOICE_USER:
       return {
         ...state,
-        exercises: state.exercises.map(exercise =>
+        exercises: state.exercises.map((exercise) =>
           exercise._id === payload.id
             ? { ...exercise, correct_users: payload.correct_users }
             : exercise
         ),
-        loading: false
+        loading: false,
       };
     case GET_EXERCISE:
       return {
         ...state,
         exercise: payload,
         loading: false,
-        isAuthenticated_exercise: false
+        isAuthenticated_exercise: false,
       };
     case ADD_EXERCISE:
       return {
         ...state,
         exercises: [payload, ...state.exercises],
-        loading: false
+        loading: false,
       };
     case DELETE_EXERCISE:
       return {
         ...state,
-        exercises: state.exercises.filter(exercise => exercise._id !== payload),
-        loading: false
+        exercises: state.exercises.filter(
+          (exercise) => exercise._id !== payload
+        ),
+        loading: false,
       };
     case EXERCISE_ERROR:
       return {
         ...state,
         error: payload,
-        loading: false
+        loading: false,
       };
     case EXERCISE_ACCESS_ERROR:
       return {
         ...state,
         error: payload,
-        isAuthenticated_exercise: false
+        isAuthenticated_exercise: false,
       };
     default:
       return state;

@@ -1,3 +1,6 @@
+/*Server.js file is the file where we connect to the database,
+ initialize middleware and define routes of the application. */
+
 const express = require("express");
 const connectDB = require("./config/db");
 const path = require("path");

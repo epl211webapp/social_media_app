@@ -1,3 +1,11 @@
+/*
+1) Dashboard.js contains the page for the dashboard of a user. If the user has no profile 
+then there is a link for a page to create a profile. If he/she has a profile already
+ then the dashboard includes information about the user and also a button that allows
+  him/her to delete his/her account. 
+
+*/
+
 import React from "react";
 import { useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
@@ -43,7 +51,7 @@ const Dashboard = ({
               Delete My Account
             </button>
           </div>
-          <div className="exercises">
+          {/* <div className="exercises">
             <h1>Exercises this user has completed</h1>
             {exercises.map((exercise) => {
               //console.log(exercise.answers);
@@ -58,7 +66,7 @@ const Dashboard = ({
                 }
               });
             })}
-          </div>
+          </div> */}
         </Fragment>
       ) : (
         <Fragment>

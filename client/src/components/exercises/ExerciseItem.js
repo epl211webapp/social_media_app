@@ -1,3 +1,9 @@
+/*
+5)ExerciseItem.js is the component for the presentation of an individual exercise. 
+This means the individual box of an exercise when it appears on the exercises list in various parts of the application. 
+
+*/
+
 import React, { Fragment, useState } from "react";
 import PropTypes from "prop-types";
 import { Redirect } from "react-router-dom";
@@ -28,6 +34,7 @@ const ExerciseItem = ({
     answers,
     correct_users,
   },
+  index,
   deleteExercise,
   showActions,
 }) => {
@@ -92,7 +99,7 @@ const ExerciseItem = ({
         </div>
 
         <div>
-          <p class="my-1">{description}</p>
+          <h4 class="my-1">Exercise {index}</h4>
           <p class="post-date">
             Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
           </p>
@@ -103,14 +110,14 @@ const ExerciseItem = ({
                 <div className="form-group">
                   <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Password (Might be optional, just press solve)"
                     name="password"
                     value={password}
                     onChange={(e) => onChange(e)}
                   />
                 </div>
                 <div className="">
-                  {answers.length > 0 && (
+                  {false && (
                     <div>
                       <CanvasJSChart
                         options={options}

@@ -1,3 +1,8 @@
+/*
+This file includes all the constants which are used by all the other action files. This is usually made for convenience to have all the types at one place.
+
+*/
+
 export const SET_ALERT = "SET_ALERT";
 export const REMOVE_ALERT = "REMOVE_ALERT";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";

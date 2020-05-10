@@ -1,3 +1,10 @@
+/*
+
+3)Navbar.js is component for the navigation bar at the top of the web application 
+and mainly contains buttons to the many parts of the application (e.g. exercises, profiles etc). 
+
+*/
+
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";

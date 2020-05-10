@@ -1,29 +1,41 @@
 /*
-6)Exercises.js contains all the buttons for individual chapters (ExerciseChapterButton.js) 
+1)Alert.js contains the box of alerts that show up on the top of the page, \
+when a user does an action (e.g. creating an exercise),
+ or a user makes a mistake (e.g. an alert for wrong password). 
 
 */
+
 import React, { Fragment, useEffect } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
-import ExerciseChapterButton from "./ExerciseChapterButton";
+
+import ExerciseWeekButton from "./ExerciseWeekButton";
 
 import { getExercises } from "../../actions/exercise";
 
-const Exercises = ({ getExercises, exercise: { exercises, loading } }) => {
+const ExercisesClass = ({ getExercises, exercise: { exercises, loading } }) => {
   useEffect(() => {
     getExercises();
   }, [getExercises]);
 
   //const [displayExerciseInputs, toggleExerciseInputs] = React.useState(false);
 
-  const chapters = [
-    "Regular Languages",
-    "Context Free Languages",
-    "The Church Turing Thesis",
-    "Decidability",
-    "Reducability",
-    "Time Complexity",
+  const weeks = [
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
+    "12",
+    "13",
+    "14",
   ];
   return loading ? (
     <Spinner />
@@ -34,12 +46,12 @@ const Exercises = ({ getExercises, exercise: { exercises, loading } }) => {
         <i className="fas fa-user">Select exercise to solve</i>
       </p>
       <div class="my-2">
-        {chapters.map((chapter, index) => {
+        {weeks.map((week, index) => {
           return (
-            <ExerciseChapterButton
+            <ExerciseWeekButton
               index={index}
-              chapter={chapter}
-              in_class_or_home={"Home"}
+              week={week}
+              in_class_or_home={"Class"}
             />
           );
         })}
@@ -48,7 +60,7 @@ const Exercises = ({ getExercises, exercise: { exercises, loading } }) => {
   );
 };
 
-Exercises.propTypes = {
+ExercisesClass.propTypes = {
   getExercises: PropTypes.func.isRequired,
   exercise: PropTypes.object.isRequired,
 };
@@ -57,4 +69,4 @@ const mapStateToProps = (state) => ({
   exercise: state.exercise,
 });
 
-export default connect(mapStateToProps, { getExercises })(Exercises);
+export default connect(mapStateToProps, { getExercises })(ExercisesClass);
